@@ -2,27 +2,16 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-import time
-
 from samsungtvws import SamsungTVWS
 
 ip = "192.168.12.222"
 token_file = ".samsungtv.token"
+
+
 tv = SamsungTVWS(ip, port=8002, token_file=token_file)
 
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
-
-# How many consecutive frames a gesture must be detected to trigger action
-GESTURE_FRAMES_REQUIRED = 3  
-
-# Track how many frames each gesture has been detected
-gesture_counts = {
-    "Open Palm": 0,
-    "Fist": 0,
-    "Point Left": 0,
-    "Point Right": 0
-}
 
     
 def is_open_palm(hand_landmarks):
@@ -74,10 +63,10 @@ def classify_pointing(hand_landmarks):
             return "Point Right"
     elif is_open_palm(hand_landmarks):
         tv.shortcuts().enter()
-        return "Enter"
+        return "Open Palm"
     elif is_fist(hand_landmarks):
         tv.shortcuts().home()
-        return "Open menu"
+        return "fist"
 
     return None
 
