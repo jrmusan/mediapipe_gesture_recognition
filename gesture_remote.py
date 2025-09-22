@@ -2,6 +2,14 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
+from samsungtvws import SamsungTVWS
+
+ip = "192.168.12.222"
+token_file = ".samsungtv.token"
+
+
+tv = SamsungTVWS(ip, port=8002, token_file=token_file)
+
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 
@@ -23,8 +31,10 @@ def fingers_up(hand_landmarks):
 def classify_gesture(hand_landmarks):
     finger_status = fingers_up(hand_landmarks)
     if sum(finger_status) == 0:
+        tv.shortcuts().volume_up()
         return "Fist"
     elif sum(finger_status) >= 4:
+        tv.shortcuts().volume_down()
         return "Open Palm"
     else:
         return "Other"
