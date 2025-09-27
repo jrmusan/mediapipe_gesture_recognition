@@ -52,5 +52,4 @@ Press `q` in the camera window to exit.
   generate one.
 
 ## License
-This project contains example code for demonstration purposes. No license is
-specified — add one if you plan to share or reuse this repository publicly.
+mediapipe_gesture_recognition is under [Apache v2 license](LICENSE).
