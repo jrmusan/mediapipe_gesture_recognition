@@ -32,9 +32,8 @@ def print_result(result, output_image, timestamp_ms: int):
     text = None
     if result and result.gestures:
         g = result.gestures[0][0]  # first gesture, first category
-        # include name and optionally score
         text = f"{g.category_name} Confidence: ({g.score:.2f})"
-        print(f'gesture recognition result {text}')
+        print(f'Reconized: {text}')
 
     # update shared state
     global _latest_gesture
@@ -77,20 +76,10 @@ def main():
                 # results for LIVE_STREAM are delivered via the `print_result` callback
                 recognizer.recognize_async(mp_image, timestamp_ms)
 
-                # ~~~~~~~ ALL THIS NONESNSE BELOW IS JUST TO SHOW THE GESTURE ON THE CAMERA FEED ~~~~~~~
-                label = _latest_gesture
-                if label:
-                    font = cv2.FONT_HERSHEY_SIMPLEX
-                    font_scale = 0.8
-                    thickness = 2
-                    (w, h), _ = cv2.getTextSize(label, font, font_scale, thickness)
-                    pad = 8
-                    x, y = 10, 30  # top-left origin for label
-                    # background rectangle (black, filled)
-                    cv2.rectangle(frame, (x - pad//2, y - h - pad//2), (x + w + pad, y + pad//2), (0, 0, 0), -1)
-                    # text (white)
-                    cv2.putText(frame, label, (x, y), font, font_scale, (255, 255, 255), thickness, cv2.LINE_AA)
-                # ~~~~~~~ ALL THIS NONESNSE ABOVE IS JUST TO SHOW THE GESTURE ON THE CAMERA FEED ~~~~~~~
+                # Draw the latest gesture on the frame 
+                detected_gesture = _latest_gesture
+                if detected_gesture:    
+                    cv2.putText(frame, detected_gesture, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
 
                 # Show the camera feed and stop on 'q'
                 cv2.imshow('Gesture Live', frame)

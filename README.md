@@ -24,7 +24,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-3. Download the MediaPipe gesture recognizer [.task file model here](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer/index#models) and place it into the root of the repository.
+3. Download the MediaPipe gesture recognizer [.task file model here](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer/index#models) and place it into the root of the repository. This default model can recognize seven classes (i.e. 👍, 👎, ✌️, ☝️, ✊, 👋, 🤟) in one or two hands
    
 
 4. Run the demo:
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```bash
 python demo.py
 ```
-NOTE: It takes like ~20 secs the first time to start running
+* NOTE: It takes like ~20 secs the first time to start running
 
 Press `q` in the camera window to exit.
 
@@ -40,7 +40,7 @@ Press `q` in the camera window to exit.
 - `demo.py` — Live camera demo using MediaPipe GestureRecognizer in
   LIVE_STREAM mode.
 - `gesture_recognizer.task` — (not included) The model file expected by the
-  demo. Obtain a model from MediaPipe or export one compatible with MediaPipe
+  demo. Obtain a model from [Mediapipe](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer/index#models) or export one compatible with MediaPipe
   Tasks.
 - `requirements.txt` — Python dependencies used by this project.
 
