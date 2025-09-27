@@ -8,6 +8,8 @@ GestureRecognizer in live-stream mode (camera input). The `demo.py` script
 opens your webcam, feeds frames into the recognizer, and prints gesture
 classification results via a callback.
 
+<img width="962" height="568" alt="Screenshot 2025-09-27 at 9 24 59 AM" src="https://github.com/user-attachments/assets/b00099a1-a8a4-42b4-94d3-3934a424160b" />
+
 ## Quickstart
 
 1. Install Python 3.8+ and create a virtual environment (recommended):
