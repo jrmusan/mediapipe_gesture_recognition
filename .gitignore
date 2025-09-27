@@ -132,9 +132,3 @@ dmypy.json
 
 # bat
 *.bat
-
-# Local Samsung TV IP (one line) - create a file named .samsungtv_ip and add your TV's IP
-.samsungtv_ip
-
-# Token to connect to the TV
-.samsungtv.token
