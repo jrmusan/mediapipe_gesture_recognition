@@ -4,9 +4,6 @@ import mediapipe as mp
 from pathlib import Path
 from typing import Optional, List, Tuple
 
-# NOTE: this file is a minimal live-stream example following the
-# Google MediaPipe GestureRecognizer demo. 
-
 # === CONFIGURATION ===
 # Path to the .task model file. MUST BE placed at the repository/script root.
 current_directory = Path(__file__).parent
@@ -39,10 +36,9 @@ def print_result(result, output_image, timestamp_ms: int):
     """Callback for live-stream results, because its an asynchronous API we have to use a callback for its reponse. 
 
     The demo simpily prints the result
-    You could also use the result you'd use the landmarks/classification info to drive your logic or draw overlays on the output_image.
+    You could also use the landmarks/classification info to drive your logic or draw overlays on the output_image.
     """
 
-    print(result)
     text = None
     if result and result.gestures:
         # The result contains four components
@@ -109,20 +105,24 @@ def main():
                 # Draw the latest gesture so you can see what the heck it is
                 detected_gesture = _latest_gesture
                 if detected_gesture:
-                    cv2.putText(frame_flipped, detected_gesture, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
+                    cv2.putText(frame_flipped, detected_gesture, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
                 # ===== Draw hand landmarks, this is totatly unessassry but looks cool as heck =====
                 if _latest_landmarks_norm:
                     h, w = frame_flipped.shape[:2]
                     # Convert normalized landmarks to pixel coords.
                     pts = [(int((1.0 - x) * w), int(y * h)) for (x, y) in _latest_landmarks_norm]
-                    # draw connections
+                    # draw connections with a dark outline + colored inner line for visibility
                     for a, b in HAND_CONNECTIONS:
                         if a < len(pts) and b < len(pts):
-                            cv2.line(frame_flipped, pts[a], pts[b], (0, 255, 0), 2)
-                    # draw keypoints
+                            # outer outline
+                            cv2.line(frame_flipped, pts[a], pts[b], (0, 0, 0), 10, cv2.LINE_AA)
+                            # inner colored line
+                            cv2.line(frame_flipped, pts[a], pts[b], (0, 255, 0), 6, cv2.LINE_AA)
+                    # draw keypoints with outline
                     for (x_px, y_px) in pts:
-                        cv2.circle(frame_flipped, (x_px, y_px), 4, (0, 0, 255), -1)
+                        cv2.circle(frame_flipped, (x_px, y_px), 10, (0, 0, 0), -1)
+                        cv2.circle(frame_flipped, (x_px, y_px), 6, (0, 0, 255), -1)
                 # ===== Draw hand landmarks, this is totatly unessassry but looks cool as heck =====
 
                 # Show the camera feed and stop on 'q'
