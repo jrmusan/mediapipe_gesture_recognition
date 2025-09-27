@@ -24,8 +24,8 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-3. Place the MediaPipe gesture recognizer model (.task) into the root of the repository.
-   Download [.task file model here](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer/index#models) 
+3. Download the MediaPipe gesture recognizer [.task file model here](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer/index#models) and place it into the root of the repository.
+   
 
 4. Run the demo:
 NOTE: It takes like ~20 secs the first time to start running
