@@ -28,18 +28,17 @@ pip install -r requirements.txt
    
 
 4. Run the demo:
-NOTE: It takes like ~20 secs the first time to start running
 
 ```bash
 python demo.py
 ```
+NOTE: It takes like ~20 secs the first time to start running
 
 Press `q` in the camera window to exit.
 
 ## Files
 - `demo.py` — Live camera demo using MediaPipe GestureRecognizer in
-  LIVE_STREAM mode. Edit `MODEL_PATH` at the top of the file to point to your
-  `.task` model file.
+  LIVE_STREAM mode.
 - `gesture_recognizer.task` — (not included) The model file expected by the
   demo. Obtain a model from MediaPipe or export one compatible with MediaPipe
   Tasks.
